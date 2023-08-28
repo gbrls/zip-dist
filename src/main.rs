@@ -99,6 +99,7 @@ fn clusters(graph: &[Vec<(usize, f64)>], max_dist: f64) -> Vec<Vec<usize>> {
         }
     }
 
+    clusters.sort_by_key(|c| c.len());
     clusters
 }
 
@@ -133,7 +134,12 @@ fn build_mst(dist: &[Vec<f64>], n: usize) -> (Vec<(usize, usize, f64)>, Vec<Vec<
 #[derive(Parser, Debug)]
 struct Opts {
     /// Directory with files to classify
-    dir: String
+    #[arg(short)]
+    dir: String,
+
+    /// Maximum distance between files to group them together (around 0.0 - 1.5)
+    #[arg(short, default_value_t = 0.45f64)]
+    max_dist: f64
 }
 
 fn main() {
@@ -179,8 +185,9 @@ fn main() {
     for (i, j, d) in mst {
         println!("{} {} => {}", input[i], input[j], d);
     }
-    let clusters = clusters(&graph, 0.45f64);
+    let clusters = clusters(&graph, opts.max_dist);
 
+    println!("\n\n=== Clusters ===");
     for c in clusters {
         println!("\n=================\n");
         for i in c {
