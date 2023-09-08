@@ -139,7 +139,8 @@ struct Opts {
 
     /// Maximum distance between files to group them together (around 0.0 - 1.5)
     #[arg(short, default_value_t = 0.45f64)]
-    max_dist: f64
+    max_dist: f64,
+    dir: String
 }
 
 fn main() {
@@ -188,6 +189,8 @@ fn main() {
     let clusters = clusters(&graph, opts.max_dist);
 
     println!("\n\n=== Clusters ===");
+    let clusters = clusters(&graph, 0.45f64);
+
     for c in clusters {
         println!("\n=================\n");
         for i in c {
