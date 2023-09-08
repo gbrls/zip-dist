@@ -2,6 +2,8 @@
 name = "gzip-cmp"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
+description = "This is a library that makes a distance measurement between binary data based on the difference of the compressed data length"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
