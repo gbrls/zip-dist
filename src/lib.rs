@@ -37,7 +37,7 @@ pub fn build(data: &[&[u8]], max_dist: f64) -> Vec<usize> {
     println!("Building distance table...");
     let d = build_distance_table(data);
     println!("Building mst...");
-    let (mst, graph) = build_mst(&d, data.len());
+    let (_mst, graph) = build_mst(&d, data.len());
     println!("Building clusters...");
     return clusters(&graph, max_dist);
 }
